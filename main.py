@@ -1,10 +1,13 @@
 from tkinter import *
 import math
 # ---------------------------- CONSTANTS ------------------------------- #
-PINK = "#e2979c"
-RED = "#e7305b"
-GREEN = "#9bdeac"
+GRAY = "#79888c"
+RED = "#f95335"
+GREEN = "#2e8b57"
 YELLOW = "#f7f5dd"
+COFFEE = "#2b0800"
+LIGHT_COFFEE = "#aca099"
+COFFEE_TITLE = "#674a40"
 FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
@@ -18,7 +21,7 @@ def reset_timer():
     reps = 0
     window.after_cancel(timer)
     Start_BTN['state'] = NORMAL
-    Status_LBL.config(text="Timer", foreground=GREEN)
+    Status_LBL.config(text="Timer", foreground=COFFEE)
     canvas.itemconfig(Timer_LBL, text="00:00")
     Check_LBL.config(text="")
 
@@ -33,7 +36,7 @@ def start_timer():
     long_break_sec = LONG_BREAK_MIN * 60
     if reps % 2 == 0:#when to take a break and when to start work
         count_down(short_break_sec)
-        Status_LBL.config(text="Break",foreground=PINK)
+        Status_LBL.config(text="Break", foreground=GRAY)
     elif reps % 8 == 0 :
         count_down(long_break_sec)
         Status_LBL.config(text="Break",foreground=RED)
@@ -69,31 +72,31 @@ def count_down(count):
 #-------window setup--------
 
 window = Tk()
-window.title("Pomodoro")
-window.config(padx=80,pady=50,bg=YELLOW)
-canvas = Canvas(width=200,height=224,bg=YELLOW,highlightthickness=0)
-Photo = PhotoImage(file="tomato.png")#background photo
-canvas.create_image(100,112,image=Photo)
+window.title("Coffee Timer")
+window.config(padx=20,pady=10,bg=YELLOW)
+canvas = Canvas(width=221,height=300,bg=YELLOW,highlightthickness=0)
+Photo = PhotoImage(file="Coffee1.png")#background photo
+canvas.create_image(100,150,image=Photo)
 
 canvas.grid(column=1,row=1)
 
 #--------buttons setup--------
 
-Start_BTN = Button(text="Start",width=5,background=YELLOW,activebackground=GREEN,highlightthickness=0,borderwidth=0,command=start_timer)
+Start_BTN = Button(text="Start",width=5,background=YELLOW,activebackground=LIGHT_COFFEE,highlightthickness=0,borderwidth=0,command=start_timer)
 Start_BTN.grid(column=0,row=4)
 
-Reset_BTN = Button(text="Reset",width=5,background=YELLOW,activebackground=GREEN,highlightthickness=0,borderwidth=0,command=reset_timer)
+Reset_BTN = Button(text="Reset",width=5,background=YELLOW,activebackground=LIGHT_COFFEE,highlightthickness=0,borderwidth=0,command=reset_timer)
 Reset_BTN.grid(column=2,row=4)
 
 
 #--------Labels setup--------
 
-Status_LBL = Label(text="Timer", background=YELLOW, foreground=GREEN, font=(FONT_NAME, 35, "bold"))
+Status_LBL = Label(text="Timer", background=YELLOW, foreground=COFFEE_TITLE, font=(FONT_NAME, 35, "bold"))
 Status_LBL.grid(column=1, row=0)
 
 Check_LBL = Label(background=YELLOW,foreground=GREEN,font=(FONT_NAME,15,"normal"))
 Check_LBL.grid(column=1,row=3)
 
-Timer_LBL= canvas.create_text(100,130,text="00:00",fill=YELLOW,font=(FONT_NAME,25,"bold"))
+Timer_LBL= canvas.create_text(100,200,text="00:00",fill=COFFEE,font=(FONT_NAME,25,"bold"))
 
 window.mainloop()
